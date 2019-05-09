@@ -41,6 +41,7 @@ namespace HandBrakeWPF
         public const string PauseOnLowDiskspace = "PauseOnLowDiskspace";
         public const string PauseOnLowDiskspaceLevel = "LowDiskSpaceWarningLevelInBytes";
         public const string RemovePunctuation = "RemovePunctuation";
+        public const string CopySourceDateTime = "CopySourceDateTime";
         public const string ShowPresetPanel = "ShowPresetPanelOption";
         public const string ResetWhenDoneAction = "ResetWhenDoneAction";
         public const string DisableLibDvdNav = "DisableLibDvdNav";

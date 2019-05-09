@@ -22,6 +22,10 @@ namespace HandBrakeWPF.Services.Encode
     using HandBrakeWPF.Properties;
     using HandBrakeWPF.Services.Encode.Factories;
 
+    // required to access preferences
+    using Caliburn.Micro;
+    using HandBrakeWPF.Services.Interfaces;
+
     using EncodeTask = Model.EncodeTask;
     using HandBrakeInstanceManager = Instance.HandBrakeInstanceManager;
     using IEncode = Interfaces.IEncode;
@@ -231,6 +235,24 @@ namespace HandBrakeWPF.Services.Encode
                 e.Error
                     ? new EventArgs.EncodeCompletedEventArgs(false, null, string.Empty, this.currentTask.Destination, hbLog, filesize)
                     : new EventArgs.EncodeCompletedEventArgs(true, null, string.Empty, this.currentTask.Destination, hbLog, filesize));
+
+            IUserSettingService userSettingService = IoC.Get<IUserSettingService>();
+
+            if (!e.Error && userSettingService.GetUserSetting<bool>(UserSettingConstants.CopySourceDateTime))
+            {
+                CopySourceDateTimeToDestination(currentTask.Source, currentTask.Destination);
+            }
+        }
+
+        private void CopySourceDateTimeToDestination(string source, string destination)
+        {
+            DateTime timeC = File.GetCreationTime(source);
+            DateTime timeW = File.GetLastWriteTime(source);
+            DateTime timeA = File.GetLastWriteTime(source);
+
+            File.SetCreationTime(destination, timeC);
+            File.SetLastWriteTime(destination, timeW);
+            File.SetLastAccessTime(destination, timeA);
         }
 
         private long GetFilesize(string destination)

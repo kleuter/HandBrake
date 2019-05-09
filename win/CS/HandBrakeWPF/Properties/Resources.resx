@@ -1415,6 +1415,9 @@ Would you like to overwrite it?</value>
   <data name="Options_RemovePunctuation" xml:space="preserve">
     <value>Remove common punctuation</value>
   </data>
+  <data name="Options_CopySourceDateTime" xml:space="preserve">
+    <value>Copy source date/time to the destination file</value>
+  </data>
   <data name="Options_ReplaceUnderscores" xml:space="preserve">
     <value>Replace underscores with a space</value>
   </data>

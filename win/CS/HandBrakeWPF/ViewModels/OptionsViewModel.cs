@@ -87,6 +87,7 @@ namespace HandBrakeWPF.ViewModels
         private int downloadProgressPercentage;
         private UpdateCheckInformation updateInfo;
         private bool removePunctuation;
+        private bool copySourceDateTime;
         private bool resetWhenDoneAction;
         private bool enableQuickSyncDecoding;
         private bool showQueueInline;
@@ -632,6 +633,22 @@ namespace HandBrakeWPF.ViewModels
             {
                 this.removePunctuation = value;
                 this.NotifyOfPropertyChange(() => RemovePunctuation);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether remove punctuation.
+        /// </summary>
+        public bool CopySourceDateTime
+        {
+            get
+            {
+                return this.copySourceDateTime;
+            }
+            set
+            {
+                this.copySourceDateTime = value;
+                this.NotifyOfPropertyChange(() => CopySourceDateTime);
             }
         }
 
@@ -1412,6 +1429,7 @@ namespace HandBrakeWPF.ViewModels
             // Title case
             this.ChangeToTitleCase = this.userSettingService.GetUserSetting<bool>(UserSettingConstants.AutoNameTitleCase);
             this.RemovePunctuation = this.userSettingService.GetUserSetting<bool>(UserSettingConstants.RemovePunctuation);
+            this.CopySourceDateTime = this.userSettingService.GetUserSetting<bool>(UserSettingConstants.CopySourceDateTime);
 
             // #############################
             // Picture Tab
@@ -1562,6 +1580,7 @@ namespace HandBrakeWPF.ViewModels
             this.userSettingService.SetUserSetting(UserSettingConstants.AutoNameRemoveUnderscore, this.RemoveUnderscores);
             this.userSettingService.SetUserSetting(UserSettingConstants.AutoNameTitleCase, this.ChangeToTitleCase);
             this.userSettingService.SetUserSetting(UserSettingConstants.RemovePunctuation, this.RemovePunctuation);
+            this.userSettingService.SetUserSetting(UserSettingConstants.CopySourceDateTime, this.CopySourceDateTime);
 
             /* Previews */
             this.userSettingService.SetUserSetting(UserSettingConstants.VLCPath, this.VLCPath);

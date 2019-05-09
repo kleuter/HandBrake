@@ -3020,7 +3020,18 @@ namespace HandBrakeWPF.Properties {
                 return ResourceManager.GetString("Options_RemovePunctuation", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Preserve source file date/time
+        /// </summary>
+        public static string Options_CopySourceDateTime
+        {
+            get
+            {
+                return ResourceManager.GetString("Options_CopySourceDateTime", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Replace underscores with a space.
         /// </summary>

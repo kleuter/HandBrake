@@ -230,18 +230,18 @@ namespace HandBrakeWPF.Services.Encode
             string hbLog = this.ProcessLogs(this.currentTask.Destination, this.isPreviewInstance, this.currentConfiguration);
             long filesize = this.GetFilesize(this.currentTask.Destination);
 
-            // Raise the Encode Completed Event.
-            this.InvokeEncodeCompleted(
-                e.Error
-                    ? new EventArgs.EncodeCompletedEventArgs(false, null, string.Empty, this.currentTask.Destination, hbLog, filesize)
-                    : new EventArgs.EncodeCompletedEventArgs(true, null, string.Empty, this.currentTask.Destination, hbLog, filesize));
-
             IUserSettingService userSettingService = IoC.Get<IUserSettingService>();
 
             if (!e.Error && userSettingService.GetUserSetting<bool>(UserSettingConstants.CopySourceDateTime))
             {
                 CopySourceDateTimeToDestination(currentTask.Source, currentTask.Destination);
             }
+
+            // Raise the Encode Completed Event.
+            this.InvokeEncodeCompleted(
+                e.Error
+                    ? new EventArgs.EncodeCompletedEventArgs(false, null, string.Empty, this.currentTask.Destination, hbLog, filesize)
+                    : new EventArgs.EncodeCompletedEventArgs(true, null, string.Empty, this.currentTask.Destination, hbLog, filesize));
         }
 
         private void CopySourceDateTimeToDestination(string source, string destination)
